@@ -1,0 +1,13 @@
+Trial,Method,Piece,Destination
+1,Ray,Pawn,0.05
+2,Ray,Knight,0.05
+3,Ray,Queen,0.15
+4,Ray,Bishop,0.15
+5,Voice,Pawn,0.05
+6,Voice,Knight,0.05
+7,Voice,Queen,0.15
+8,Voice,Bishop,0.15
+9,Pinch,Pawn,0.05
+10,Pinch,Knight,0.05
+11,Pinch,Queen,0.15
+12,Pinch,Bishop,0.15
