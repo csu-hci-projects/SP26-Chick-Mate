@@ -12,6 +12,7 @@ public class TrialRunner : MonoBehaviour
     private float startTime;
     private string filePath;
     private bool trialResolved = false;
+    
 
     private Dictionary<ChessPiece, Vector3> startingPositions = new Dictionary<ChessPiece, Vector3>();
     private Dictionary<ChessPiece, Quaternion> startingRotations = new Dictionary<ChessPiece, Quaternion>();
@@ -29,11 +30,10 @@ public class TrialRunner : MonoBehaviour
             $"Participant_{loader.participantID}_Output.csv"
         );
 
-        if (!File.Exists(filePath))
-        {
-            File.WriteAllText(filePath, "Trial,Method,Piece,Destination,Time\n");
-        }
+        File.WriteAllText(filePath, "Trial,Method,Piece,Destination,Time,Distance,Size,IndexOfDifficulty\n");
 
+        Debug.Log("Output CSV path: " + filePath);
+        
         SaveStartingPositions();
         StartNextTrial();
     }
@@ -154,10 +154,23 @@ public class TrialRunner : MonoBehaviour
         TrialData t = loader.trials[index];
         float movementTime = Time.time - startTime;
 
-        string line = $"{t.trial},{t.method},{t.piece},{t.destination},{movementTime:F3}\n";
+        float distance = Vector3.Distance(
+            startingPositions[piece],
+            piece.transform.position
+        );
+
+        float size = FindObjectOfType<SimpleBoard>().cellSize;
+
+        float indexOfDifficulty = Mathf.Log((distance / size) + 1f, 2f);
+
+        string line =
+            $"{t.trial},{t.method},{t.piece},{t.destination},{movementTime:F3},{distance:F4},{size:F4},{indexOfDifficulty:F4}\n";
+
         File.AppendAllText(filePath, line);
 
-        Debug.Log($"Completed Trial {t.trial} | {piece.pieceID} to {destination} | Time={movementTime:F3}");
+        Debug.Log(
+            $"Completed Trial {t.trial} | Time={movementTime:F3} | D={distance:F4} | W={size:F4} | ID={indexOfDifficulty:F4}"
+        );
 
         index++;
 

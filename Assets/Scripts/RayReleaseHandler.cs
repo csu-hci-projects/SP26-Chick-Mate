@@ -17,8 +17,6 @@ public class RayReleaseHandler : MonoBehaviour
 
         string square = board.GetClosestSquare(transform.position);
 
-        // transform.position = board.GetWorldPosition(square);
-
         trialRunner.RegisterMove(piece, square);
 
         Debug.Log($"Released {piece.pieceName} on {square}");

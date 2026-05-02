@@ -67,46 +67,6 @@ public class SimpleBoard : MonoBehaviour
         return grid[x, y];
     }
 
-    public void PlacePiece(ChessPiece piece, string square)
-    {
-        Vector3 target = GetWorldPosition(square);
-
-        Debug.Log($"Moving {piece.pieceName} to {square} at {target}");
-
-        piece.transform.position = target;
-
-        if (trialRunner != null)
-            trialRunner.RegisterMove(piece, square);
-    }
-
-    void OnDrawGizmos()
-    {
-        if (a1Origin == null)
-            return;
-
-        Gizmos.color = Color.yellow;
-
-        for (int x = 0; x < 8; x++)
-        {
-            for (int y = 0; y < 8; y++)
-            {
-                Vector3 letterDirection = a1Origin.forward;
-                Vector3 numberDirection = a1Origin.right;
-
-                Vector3 pos =
-                    a1Origin.position +
-                    letterDirection * (x * cellSize) +
-                    numberDirection * (y * cellSize) +
-                    a1Origin.up * pieceHeight;
-
-                Gizmos.DrawSphere(pos, 0.01f);
-            }
-        }
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(a1Origin.position, 0.02f);
-    }
-
     public string GetClosestSquare(Vector3 worldPosition)
     {
         BuildGrid();
