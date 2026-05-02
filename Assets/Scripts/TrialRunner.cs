@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.IO;
 
 public class TrialRunner : MonoBehaviour
 {
     public TrialLoader loader;
-    public SimpleBoard board;
     public UIManager ui;
 
     private int index = 0;
@@ -18,7 +18,16 @@ public class TrialRunner : MonoBehaviour
 
     void Start()
     {
-        filePath = Path.Combine(Application.dataPath, "ChickMate_OutputFile.csv");
+        if (loader == null)
+        {
+            Debug.LogError("TrialLoader is not assigned on TrialRunner.");
+            return;
+        }
+
+        filePath = Path.Combine(
+            Application.dataPath,
+            $"Participant_{loader.participantID}_Output.csv"
+        );
 
         if (!File.Exists(filePath))
         {
@@ -26,7 +35,6 @@ public class TrialRunner : MonoBehaviour
         }
 
         SaveStartingPositions();
-
         StartNextTrial();
     }
 
@@ -79,9 +87,12 @@ public class TrialRunner : MonoBehaviour
 
         if (index >= loader.trials.Count)
         {
-            Debug.Log("Experiment complete");
+            Debug.Log("Experiment complete.");
 
             ResetPieces();
+
+            if (ui != null)
+                ui.ShowFinal(filePath);
 
             return;
         }
@@ -101,16 +112,28 @@ public class TrialRunner : MonoBehaviour
         if (trialResolved)
             return;
 
+        if (piece == null)
+        {
+            Debug.LogError("RegisterMove called with null piece.");
+            return;
+        }
+
         TrialData t = GetCurrentTrial();
 
         if (t == null)
             return;
 
-        bool correctPiece =
-            piece.pieceName.ToLower().Trim() == t.piece.ToLower().Trim();
+        string movedPiece = (piece.pieceName + " " + piece.startSquare).ToLower().Trim();
+        string expectedPiece = t.piece.ToLower().Trim();
 
-        bool correctDestination =
-            destination.ToLower().Trim() == t.destination.ToLower().Trim();
+        string movedDestination = destination.ToLower().Trim();
+        string expectedDestination = t.destination.ToLower().Trim();
+
+        Debug.Log($"Comparing piece: '{movedPiece}' vs '{expectedPiece}'");
+        Debug.Log($"Comparing destination: '{movedDestination}' vs '{expectedDestination}'");
+
+        bool correctPiece = movedPiece == expectedPiece;
+        bool correctDestination = movedDestination == expectedDestination;
 
         if (correctPiece && correctDestination)
         {
@@ -121,7 +144,6 @@ public class TrialRunner : MonoBehaviour
             Debug.LogWarning(
                 $"Wrong move. Expected {t.piece} to {t.destination}, got {piece.pieceName} to {destination}"
             );
-
         }
     }
 
@@ -135,12 +157,22 @@ public class TrialRunner : MonoBehaviour
         string line = $"{t.trial},{t.method},{t.piece},{t.destination},{movementTime:F3}\n";
         File.AppendAllText(filePath, line);
 
-        Debug.Log($"Completed Trial {t.trial} | {piece.pieceName} to {destination} | Time={movementTime:F3}");
-
-        ResetPieces();
+        Debug.Log($"Completed Trial {t.trial} | {piece.pieceID} to {destination} | Time={movementTime:F3}");
 
         index++;
 
-        Invoke(nameof(StartNextTrial), 1.0f);
+        StartCoroutine(AdvanceAfterDelay());
+    }
+
+    IEnumerator AdvanceAfterDelay()
+    {
+        Debug.Log("Waiting before reset...");
+        yield return new WaitForSeconds(2f);
+
+        ResetPieces();
+
+        yield return new WaitForSeconds(0.2f);
+
+        StartNextTrial();
     }
 }

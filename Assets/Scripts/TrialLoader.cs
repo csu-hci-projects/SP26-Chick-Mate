@@ -1,24 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 public class TrialLoader : MonoBehaviour
 {
+    public int participantID = 1; // what YOU enter (1–12)
+    private int csvIndex;         // computed (1–3)
+
     public List<TrialData> trials = new List<TrialData>();
 
     void Awake()
     {
+        csvIndex = ((participantID - 1) % 3) + 1;
         LoadTrials();
     }
 
     void LoadTrials()
     {
-        TextAsset csvFile = Resources.Load<TextAsset>("trials");
+        string fileName = "trials_" + csvIndex;
+
+        TextAsset csvFile = Resources.Load<TextAsset>(fileName);
 
         if (csvFile == null)
         {
-            Debug.LogError("Could not find trials.csv in Assets/Resources/");
+            Debug.LogError("Could not find " + fileName + ".csv in Assets/Resources/");
             return;
         }
+
+        trials.Clear();
 
         string[] lines = csvFile.text.Split('\n');
 
@@ -40,15 +47,6 @@ public class TrialLoader : MonoBehaviour
             trials.Add(t);
         }
 
-        Debug.Log("Loaded " + trials.Count + " trials.");
+        Debug.Log($"Participant {participantID} → using trials_{csvIndex}.csv");
     }
-}
-
-[System.Serializable]
-public class TrialData
-{
-    public int trial;
-    public string method;
-    public string piece;
-    public string destination;
 }
