@@ -1112,7 +1112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.244
       objectReference: {fileID: 0}
     - target: {fileID: 2218496723442559053, guid: d6878e1999eb4b44a9f5a263af86c185, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3866,7 +3866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &757117511
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7188,7 +7188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4473f46c295933f46ae4fe1071fe75cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrialLoader
-  participantID: 1
+  participantID: 9
   trials:
   - trial: 0
     method: 
@@ -9111,7 +9111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1540749213
 BoxCollider:
   m_ObjectHideFlags: 0
