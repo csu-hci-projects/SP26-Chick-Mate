@@ -1,0 +1,13 @@
+Trial,Method,Piece,Destination,Time,Distance,Size,IndexOfDifficulty
+1,Ray,White Pawn e2,e4,20.365,0.0995,0.0600,1.4109
+2,Ray,White Knight c1,b3,8.619,0.1180,0.0600,1.5685
+3,Ray,White Queen e1,e5,8.577,0.2353,0.0600,2.2990
+4,Ray,White Rook h1,h6,6.309,0.3029,0.0600,2.5965
+5,Voice,White Pawn e2,e4,6.419,0.2855,0.0600,2.5257
+6,Voice,White Knight c1,b3,4.219,0.2897,0.0600,2.5433
+7,Voice,White Queen e1,e5,4.539,0.3592,0.0600,2.8045
+8,Voice,White Rook h1,h6,4.426,0.3980,0.0600,2.9322
+9,Pinch,White Pawn e2,e4,7.352,0.1090,0.0600,1.4942
+10,Pinch,White Knight c1,b3,9.984,0.1248,0.0600,1.6230
+11,Pinch,White Queen e1,e5,7.548,0.2483,0.0600,2.3613
+12,Pinch,White Rook h1,h6,3.787,0.2967,0.0600,2.5717

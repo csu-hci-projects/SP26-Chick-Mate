@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class VoiceControl : MonoBehaviour
 {
     public SimpleBoard board;
+    public TrialRunner trialRunner;
 
     private KeywordRecognizer recognizer;
     private Dictionary<string, Action> commands = new Dictionary<string, Action>();
@@ -24,15 +25,17 @@ public class VoiceControl : MonoBehaviour
         foreach (ChessPiece cp in allPieces)
         {
             Debug.Log("Found piece object: " + cp.gameObject.name +
-                      " | color=" + cp.pieceColor +
-                      " | piece=" + cp.pieceName);
+                      " | pieceID=" + cp.pieceID +
+                      " | pieceName=" + cp.pieceName);
 
             for (char file = 'a'; file <= 'h'; file++)
             {
                 for (int rank = 1; rank <= 8; rank++)
                 {
                     string square = $"{file}{rank}";
-                    string command = $"{cp.pieceColor.ToLower().Trim()} {cp.pieceName.ToLower().Trim()} {square}";
+
+                    // Example: "white pawn e5"
+                    string command = $"{cp.pieceName.ToLower().Trim()} {cp.startSquare.ToLower().Trim()} to {square}";
 
                     ChessPiece capturedPiece = cp;
                     string capturedSquare = square;
@@ -80,22 +83,24 @@ public class VoiceControl : MonoBehaviour
             return;
         }
 
-        if (board == null)
-        {
-            Debug.LogError("MovePiece: board is null.");
-            return;
-        }
-
         Vector3 target = board.GetWorldPosition(square);
 
         Debug.Log("Moving object: " + cp.gameObject.name);
-        Debug.Log("From position: " + cp.transform.position);
         Debug.Log("To square: " + square);
         Debug.Log("Target position: " + target);
 
         cp.transform.position = target;
 
-        Debug.Log("New actual position: " + cp.transform.position);
+        if (trialRunner != null)
+        {
+            trialRunner.RegisterMove(cp, square);
+        }
+        else
+        {
+            Debug.LogError("VoiceControl: trialRunner is not assigned.");
+        }
+
+        Debug.Log($"Voice requested square {square}, target {target}");
     }
 
     void OnApplicationQuit()

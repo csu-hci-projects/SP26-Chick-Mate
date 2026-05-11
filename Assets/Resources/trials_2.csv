@@ -1,0 +1,13 @@
+Trial,Method,Piece,Destination
+1,Voice,White Pawn e2,e4
+2,Voice,White Knight c1,b3
+3,Voice,White Queen e1,e5
+4,Voice,White Rook h1,h6
+5,Pinch,White Pawn e2,e4
+6,Pinch,White Knight c1,b3
+7,Pinch,White Queen e1,e5
+8,Pinch,White Rook h1,h6
+9,Ray,White Pawn e2,e4
+10,Ray,White Knight c1,b3
+11,Ray,White Queen e1,e5
+12,Ray,White Rook h1,h6
