@@ -17,8 +17,12 @@ Code: https://youtu.be/aaq1YcI6uzc
 Overleaf Link: https://www.overleaf.com/read/zjbcwzgrsrhn#541a88
 
 #### Final Project
-Short video:
+Short video: https://www.youtube.com/watch?v=KkOREVrLAuw
 
-Presentation Video: 
+Code: https://www.youtube.com/watch?v=8XuO0h0tI1I
 
-Overleaf Link: 
+* Our explanation of who was incharge of what parts of the project are in our presentation video rather than the code video
+
+Presentation Video: https://www.youtube.com/watch?v=T6SmBIZoXFs
+
+Overleaf Link: https://www.overleaf.com/read/zjbcwzgrsrhn#541a88
