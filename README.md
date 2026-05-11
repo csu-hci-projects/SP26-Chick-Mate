@@ -15,3 +15,10 @@ Current status: https://youtu.be/gK1qp2z-tGg
 Code: https://youtu.be/aaq1YcI6uzc
 
 Overleaf Link: https://www.overleaf.com/read/zjbcwzgrsrhn#541a88
+
+#### Final Project
+Short video:
+
+Presentation Video: 
+
+Overleaf Link: 
