@@ -26,3 +26,5 @@ Code: https://www.youtube.com/watch?v=8XuO0h0tI1I
 Presentation Video: https://www.youtube.com/watch?v=T6SmBIZoXFs
 
 Overleaf Link: https://www.overleaf.com/read/zjbcwzgrsrhn#541a88
+
+Github Link: https://github.com/csu-hci-projects/SP26-Chick-Mate.git
